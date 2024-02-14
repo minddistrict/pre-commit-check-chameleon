@@ -1,0 +1,19 @@
+name: Code
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pre-commit/action@v3.0.1
+      with:
+        extra_args: --all-files
+    - uses: pre-commit-ci/lite-action@v1.0.2
+      if: always()
+      with:
+        msg: Apply pre-commit code formatting
