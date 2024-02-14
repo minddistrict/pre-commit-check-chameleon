@@ -28,24 +28,24 @@ def attribute(node, name):
     if tal_attributes is not None and name in tal_attributes:
         for attr in tal_attributes.split(";"):
             attr = attr.strip()
-            key, value = [el.strip() for el in attr.split(None, 1)]
+            key, value = (el.strip() for el in attr.split(None, 1))
             if name == key:
                 return value
-    x_ng_attr_attribute = node.attrib.get("x-ng-attr-{0}".format(name))
+    x_ng_attr_attribute = node.attrib.get(f"x-ng-attr-{name}")
     if x_ng_attr_attribute is not None:
         return x_ng_attr_attribute
-    x_ng_attribute = node.attrib.get("x-ng-{0}".format(name))
+    x_ng_attribute = node.attrib.get(f"x-ng-{name}")
     if x_ng_attribute is not None:
         return x_ng_attribute
     return None
 
 
 class Context:
-    errors: typing.List[str]
+    errors: list[str]
     checks = None
 
     def __init__(self, filename: str, a11y_lint_exclude=None):
-        with open(filename, "r") as stream:
+        with open(filename) as stream:
             content = stream.read()
         self.errors = []
         self.node = None
@@ -67,9 +67,7 @@ class Context:
 
     def report(self, node, msg):
         self.errors.append(
-            "{0}:{1} {2}".format(
-                self.filename, node.sourceline - self.lineno_offset, msg
-            )
+            f"{self.filename}:{node.sourceline - self.lineno_offset} {msg}"
         )
 
     def run(self):
@@ -80,10 +78,10 @@ class Context:
             msg = e.msg
             for line_number in re.findall("line ([0-9]+)", msg):
                 msg = msg.replace(
-                    "line {0}".format(line_number),
-                    "line {0}".format(int(line_number) - self.lineno_offset),
+                    f"line {line_number}",
+                    f"line {int(line_number) - self.lineno_offset}",
                 )
-            self.errors.append("{0}: {1}".format(self.filename, msg))
+            self.errors.append(f"{self.filename}: {msg}")
         else:
             for check in self.checks:
                 if self.a11y_lint_exclude is not None:
@@ -206,7 +204,7 @@ def missing_for(context):
             )
 
 
-def main(argv: typing.Optional[typing.Sequence[str]] = None) -> int:
+def main(argv: typing.Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--a11y-lint-exclude")
     parser.add_argument("filenames", nargs="*")
