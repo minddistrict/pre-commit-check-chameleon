@@ -1,0 +1,7 @@
+- id: check-chameleon
+  name: Check Chameleon templates
+  description: Check for syntax and accessibility misuse in Chameleon templates.
+  entry: check-chameleon
+  language: python
+  types: [text]
+  files: \.cpt$

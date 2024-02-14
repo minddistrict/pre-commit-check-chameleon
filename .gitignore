@@ -1,0 +1,10 @@
+.coverage
+.project
+.pydevproject
+.Python
+.vscode
+*.egg-info
+*.pyc
+*.swo
+*.swp
+build/
