@@ -16,7 +16,7 @@ DOCTYPE_WRAPPER = """<!DOCTYPE html [<!ENTITY nbsp 'no-break space'>
 
 TAL_ATTRIBUTES = "{{{0}}}attributes".format(NSMAP["tal"])
 TAL_CONTENT_XPATH = (
-    "./@tal:content|.//*/@tal:content|" ".//*/@tal:replace|.//tal:block/@replace"
+    "./@tal:content|.//*/@tal:content|.//*/@tal:replace|.//tal:block/@replace"
 )
 
 
