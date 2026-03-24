@@ -8,3 +8,10 @@ updates:
       time: "11:55"
     pull-request-branch-name:
       separator: "-"
+  - package-ecosystem: pre-commit
+    directory: /
+    schedule:
+      interval: weekly
+      time: "11:55"
+    pull-request-branch-name:
+      separator: "-"
