@@ -1,5 +1,4 @@
-from setuptools import find_packages
-from setuptools import setup
+from setuptools import find_packages, setup
 
 version = "1.0.dev0"
 
@@ -26,8 +25,9 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Software Development :: Testing",
         "Topic :: Text Processing :: Markup :: HTML",
@@ -40,7 +40,7 @@ setup(
     packages=find_packages("src"),
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=3.11",
+    python_requires=">=3.12",
     install_requires=[
         "lxml",
     ],
