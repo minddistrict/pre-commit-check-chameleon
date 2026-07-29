@@ -1,6 +1,7 @@
 import argparse
 import io
 import re
+import sys
 import typing
 
 import lxml.etree
@@ -14,7 +15,7 @@ DOCTYPE_WRAPPER = """<!DOCTYPE html [<!ENTITY nbsp 'no-break space'>
 <!ENTITY times 'multiplication sign'>]>
 {0}"""
 
-TAL_ATTRIBUTES = "{{{0}}}attributes".format(NSMAP["tal"])
+TAL_ATTRIBUTES = "{{{}}}attributes".format(NSMAP["tal"])
 TAL_CONTENT_XPATH = (
     "./@tal:content|.//*/@tal:content|.//*/@tal:replace|.//tal:block/@replace"
 )
@@ -84,9 +85,10 @@ class Context:
             self.errors.append(f"{self.filename}: {msg}")
         else:
             for check in self.checks:
-                if self.a11y_lint_exclude is not None:
-                    if self.filename.startswith(self.a11y_lint_exclude):
-                        continue
+                if self.a11y_lint_exclude is not None and self.filename.startswith(
+                    self.a11y_lint_exclude
+                ):
+                    continue
                 check(self)
         return self.errors
 
@@ -220,4 +222,4 @@ def main(argv: typing.Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    exit(main())
+    sys.exit(main())
