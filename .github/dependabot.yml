@@ -4,14 +4,14 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
       time: "11:55"
     pull-request-branch-name:
       separator: "-"
   - package-ecosystem: pre-commit
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
       time: "11:55"
     pull-request-branch-name:
       separator: "-"
